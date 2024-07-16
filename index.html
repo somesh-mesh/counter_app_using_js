@@ -3,15 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <title>Countdown to 2025</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: black;">
-    <header>
-        <h1 id="counter-header">Welcome to My Counter: 0</h1>
-        <button onclick="onButtonTap()">Start Timer</button>
-    </header>
+<body>
+    <div class="container">
+        <h1>Countdown to 2025</h1>
+        <div id="countdown-timer"></div>
+    </div>
 
-    <script src="index.js"></script> <!-- Link to external JavaScript file -->
+    <script>
+        const targetDate = new Date('2025-01-01T00:00:00');
+        
+        function updateCountdown() {
+            const currentDate = new Date();
+            const timeDifference = targetDate - currentDate;
+            
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-timer').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            
+            setTimeout(updateCountdown, 1000);
+        }
+
+        updateCountdown();
+    </script>
 </body>
 </html>
